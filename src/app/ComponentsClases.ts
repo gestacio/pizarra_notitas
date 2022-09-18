@@ -1,22 +1,12 @@
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Component } from '@angular/core';
 import { Priority, Product, ToDoCard } from './product.model';
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
-})
-
+// @Component({
+//   selector: 'app-root',
+//   templateUrl: './app.component.html',
+//   styleUrls: ['./app.component.scss']
+// })
 export class AppComponent {
-  modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService) {}
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template)
-  }
-
   name = 'Gabriel';
   age = 25;
   img = "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/301998180_5755191261158931_7184967016156864645_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Rwc84uAw6HUAX9IN3ZC&_nc_ht=scontent-mia3-1.xx&oh=00_AT8Q0ey7orQTr49nJJpsBTLmSSK-583gTqjiT3z2Fo3PwQ&oe=6327DFA2"
@@ -96,6 +86,40 @@ export class AppComponent {
     },
   ]
 
+  products: Product[] = [
+    {
+      name: 'EL mejor juguete',
+      price: 565,
+      image: './assets/images/toy.webp',
+      category: 'all',
+    },
+    {
+      name: 'Bicicleta casi nueva',
+      price: 356,
+      image: './assets/images/bike.jpg'
+    },
+    {
+      name: 'Colleción de albumnes',
+      price: 34,
+      image: './assets/images/album.jpg'
+    },
+    {
+      name: 'Mis libros',
+      price: 23,
+      image: './assets/images/books.webp'
+    },
+    {
+      name: 'Casa para perro',
+      price: 34,
+      image: './assets/images/house.webp'
+    },
+    {
+      name: 'Gafas',
+      price: 3434,
+      image: './assets/images/glasses.jpg'
+    }
+  ]
+
   toggleButton() {
     this.btnDisabled = !this.btnDisabled
   }
@@ -142,54 +166,4 @@ export class AppComponent {
     this.selectedCategory = '';
     this.selectedComment = '';
   }
-
-
-
-
 }
-// @Component({
-//     selector: 'app-root',
-//     templateUrl: './app.component.html',
-//     styleUrls: ['./app.component.scss']
-//   })
-//   export class AppComponent implements OnInit {
-//     constructor(public modal:NgbModal) {}
-
-//     ngOnInit(): void {
-
-//     }
-//   }
-
-
-
-
-// @Component({
-//   selector: 'ngbd-modal-content',
-//   template: `
-//     <div class="modal-header">
-//       <h4 class="modal-title">Hi there!</h4>
-//       <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-//     </div>
-//     <div class="modal-body">
-//       <p>Hello, {{name}}!</p>
-//     </div>
-//     <div class="modal-footer">
-//       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-//     </div>
-//   `
-// })
-// export class NgbdModalContent {
-//   @Input() name: any;
-
-//   constructor(public activeModal: NgbActiveModal) {}
-// }
-
-// @Component({selector: 'ngbd-modal-component', templateUrl: './app.component.html'})
-// export class NgbdModalComponent {
-//   constructor(private modalService: NgbModal) {}
-
-//   open() {
-//     const modalRef = this.modalService.open(NgbdModalContent);
-//     modalRef.componentInstance.name = 'World';
-//   }
-// }

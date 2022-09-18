@@ -1,100 +1,265 @@
-<h1>[ngSwitch]</h1>
-<input type="text" required [(ngModel)]="person.name" />
-<div [ngSwitch]="person.name">
-  <p *ngSwitchCase="'nicolas'">La persona es nicolas</p>
-  <p *ngSwitchCase="'julian'">La persona es julian</p>
-  <p *ngSwitchCase="'camilo'">La persona es camilo</p>
-  <p *ngSwitchDefault="">No hace match</p>
-</div>
-<!-- <p *ngIf="person.name === 'nicolas'">
-  La persona es nicolas
-</p>
-<p *ngIf="person.name === 'julian'">
-  La persona es julian
-</p>
-<p *ngIf="person.name === 'camilo'">
-  La persona es camilo
-</p> -->
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container ">
+    <a class="navbar-brand" href="#"><img src="../assets/images/RedWineSoftwares.png" alt="redwine" width="150"></a>
+    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    </button> -->
+    <div class="text-center">
 
-<h1>*ngFor objs</h1>
-<div>
-  <div *ngFor="let product of products">
-    <h2>{{ product.price }}</h2>
-    <img [src]="product.image" alt="image" width="100" />
-    <p>{{ product.name }}</p>
-    <h6 *ngIf="product.category">Category: {{ product.category }}</h6>
+      <h1 class="text-light lead">Pizarrita de tareas~</h1>
+    </div>
+    <!-- <div class="container text-center">
+
+    </div> -->
   </div>
-</div>
+</nav>
 
-<h1>*ngFor</h1>
-<input type="text" required [(ngModel)]="newName" />
-<button (click)="addName()">Add name</button>
-<ul>
-  <li *ngIf="names.length === 0">No hay más elementos</li>
-  <li *ngFor="let name of names; index as i">
-    {{ i + 1 }} {{ name }}
-    <button (click)="deleteName(i)">Delete</button>
-  </li>
-</ul>
+<!-- <div class="bg-dark"></div> -->
 
-<hr />
-<h1>*ngIf</h1>
-<input type="text" required [(ngModel)]="person.name" />
-<p *ngIf="person.name === 'gabriel'">Soy Gabriel</p>
-<p *ngIf="person.name === 'julian' && person.age === 18; else elseBlock">
-  Soy Julian
-</p>
-<ng-template #elseBlock>
-  <p>Bloque de else</p>
+
+
+
+<div class="bg-light">
+  <!-- <div class="container text-center">
+    <h1>🌟 To Do List 🌟</h1>
+  </div> -->
+
+  <hr class="mx-5">
+  <!-- gap -->
+
+  <div class="container text-center">
+    <button type="button" class="btn btn-primary" (click)="openModal(modalMensaje)">Añadir nueva notita~</button>
+    <!-- <h3 class="text-center display">En el siguiente apartado podrás crear y ver tu lista de tareas</h3> -->
+    <br>
+
+    <div class="row">
+      <div class="col-4">
+        <div class="card p-3 ">
+          <!-- <form>
+            <div class="form-group">
+              <label for="toDoName">Nombre de la tarea</label>
+              <input type="text" class="form-control" id="toDoName" name="name" [(ngModel)]="selectedName">
+              <br>
+            </div>
+
+            <div class="form-group">
+              <label for="priority">Nivel de prioridad</label>
+              <select class="form-control" id="priority" name="priority" [(ngModel)]="selectedPriority">
+                <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}
+                </option>
+              </select>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label for="status">Estado de la tarea</label>
+              <select class="form-control" id="status" name="status" [(ngModel)]="selectedStatus">
+                <option *ngFor="let stat of status" [value]="stat">{{ stat }}</option>
+              </select>
+            </div>
+
+            <br>
+            <div class="form-group">
+              <label for="category">Categoría</label>
+              <select class="form-control" id="category" name="category" [(ngModel)]="selectedCategory">
+                <option *ngFor="let category of categories" [value]="category">{{ category }}
+                </option>
+              </select>
+            </div>
+            <br>
+
+
+            <div class="form-group">
+              <label for="comment">Comentario</label>
+              <textarea class="form-control" id="comment" rows="3" name="comment"
+                [(ngModel)]="selectedComment"></textarea>
+            </div>
+            <br>
+
+            <input type="submit" class="btn btn-primary" (click)="addToDoCard()" value="Agregar">
+          </form> -->
+        </div>
+      </div>
+
+
+      <div class="col-8">
+        <div class="row">
+
+          <div class="col-3">
+            <div *ngFor="let asd of toDoCards">
+              <!-- <div *ngIf="asd.status === 'Planificando'"> -->
+
+              <ng-template [ngIf]="asd.status === 'Planificando'">
+                <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header">{{ asd.priority }}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ asd.name }}</h5>
+                    <p class="card-text">{{ asd.comment }}</p>
+                    <div class="card-footer">{{ asd.category }}</div>
+                  </div>
+                </div>
+              </ng-template>
+
+              <!-- </div> -->
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div *ngFor="let toDoCard of toDoCards">
+              <div *ngIf="toDoCard.status === 'Por hacer'">
+
+                <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">{{ toDoCard.priority }}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ toDoCard.name }}</h5>
+                    <p class="card-text">{{ toDoCard.comment }}</p>
+                    <div class="card-footer">{{ toDoCard.category }}</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div *ngFor="let toDoCard of toDoCards">
+              <div *ngIf="toDoCard.status === 'En progreso'">
+
+                <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                  <div class="card-header">{{ toDoCard.priority }}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ toDoCard.name }}</h5>
+                    <p class="card-text">{{ toDoCard.comment }}</p>
+                    <div class="card-footer">{{ toDoCard.category }}</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div *ngFor="let toDoCard of toDoCards">
+              <div *ngIf="toDoCard.status === 'Finalizado'">
+
+                <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+                  <div class="card-header">{{ toDoCard.priority }}</div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ toDoCard.name }}</h5>
+                    <p class="card-text">{{ toDoCard.comment }}</p>
+                    <div class="card-footer">{{ toDoCard.category }}</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <!-- <div class="container">
+      <div class="row">
+        <div *ngFor="let asd of toDoCards">
+          <div *ngIf="asd.status === 'Planificando'">
+            <p>{{ asd.name }}</p>
+            <p>{{ asd.priority }}</p>
+            <p>{{ asd.status }}</p>
+            <p>{{ asd.category }}</p>
+            <p>{{ asd.comment }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+    <p>{{ selectedStatus }}</p>
+
+
+    <!-- <button class="btn btn-danger">Hola</button> -->
+
+  </div>
+
+  <nav class="navbar fixed-bottom navbar-dark bg-dark">
+    <div class="container text-center">
+      <!-- <a class="navbar-brand" href="#"><img src="../assets/images/RedWineSoftwares.png" alt="redwine" width="150"></a> -->
+      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    </button> -->
+      <!-- <div class="text-center">
+
+      <h1 class="text-light lead">Pizarrita de tareas~</h1>
+    </div> -->
+      <!-- <div class="container text-center">
+
+    </div> -->
+      <div class="lead text-light"><em> &copy; Redwine Softwares</em></div>
+    </div>
+  </nav>
+
+
+
+
+
+
+  <!-- modal -->
+<ng-template #modalMensaje>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>Registra tu nueva tarea</span>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="toDoName">Nombre de la tarea</label>
+        <input type="text" class="form-control" id="toDoName" name="name" [(ngModel)]="selectedName">
+        <br>
+      </div>
+
+      <div class="form-group">
+        <label for="priority">Nivel de prioridad</label>
+        <select class="form-control" id="priority" name="priority" [(ngModel)]="selectedPriority">
+          <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}
+          </option>
+        </select>
+      </div>
+
+      <br>
+      <div class="form-group">
+        <label for="status">Estado de la tarea</label>
+        <select class="form-control" id="status" name="status" [(ngModel)]="selectedStatus">
+          <option *ngFor="let stat of status" [value]="stat">{{ stat }}</option>
+        </select>
+      </div>
+
+      <br>
+      <div class="form-group">
+        <label for="category">Categoría</label>
+        <select class="form-control" id="category" name="category" [(ngModel)]="selectedCategory">
+          <option *ngFor="let category of categories" [value]="category">{{ category }}
+          </option>
+        </select>
+      </div>
+      <br>
+
+
+      <div class="form-group">
+        <label for="comment">Comentario</label>
+        <textarea class="form-control" id="comment" rows="3" name="comment"
+          [(ngModel)]="selectedComment"></textarea>
+      </div>
+      <br>
+
+      <input type="submit" class="btn btn-primary" (click)="addToDoCard(); modalRef.hide()" value="Agregar">
+    </form>
+  </div>
 </ng-template>
-<hr />
-
-<h1>NgModel</h1>
-<p>Nombre: {{ person.name }}</p>
-<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
-<p>valid: {{ nameInput.valid }}</p>
-<p>Age: {{ person.age }}</p>
-<input
-  type="number"
-  min="20"
-  max="25"
-  required
-  #ageInput="ngModel"
-  [(ngModel)]="person.age"
-/>
-<p>Valid: {{ ageInput.valid }}</p>
-
-<h1>Eventos</h1>
-<button [disabled]="btnDisabled">Enviar</button>
-<button (click)="toggleButton()">Toggle Button</button>
-<p>Edad {{ person.age }}</p>
-<button (click)="increaseAge()">Age ++</button>
-<div class="box" (scroll)="onScroll($event)">
-  <p>
-    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum dicta at
-    ipsam praesentium porro mollitia cumque libero provident sequi. Quia,
-    mollitia aperiam. Ex nemo quidem nobis numquam totam exercitationem eligendi
-    autem in. Maiores, minus distinctio corporis velit eaque quo veritatis
-    tempore culpa id aut fugiat quibusdam, saepe molestias! Nisi, eos!
-  </p>
-</div>
-<p>Nombre: {{ person.name }}</p>
-<input
-  type="text"
-  name="text"
-  id="text"
-  [value]="person.name"
-  (keyup)="changeName($event)"
-/>
-<hr />
-<h1>Propiedades</h1>
-<input type="text" name="text" id="text" [value]="person.name" />
-<button [disabled]="btnDisabled">Enviar</button>
-<progress max="100" [value]="person.age"></progress>
-<img [src]="person.avatar" alt="image" width="100" />
-<hr />
-<h1>Hola mundo</h1>
-<h2>{{ "hola mundo".repeat(5) }}</h2>
-<p>3 + 3 = {{ 3 + 3 }}</p>
-<h3>Hola, soy {{ name }}, y tengo {{ age }} años</h3>
-<img src="{{ img }}" alt="image" />
