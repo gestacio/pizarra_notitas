@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import {NgbActiveModal, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Priority, Product, ToDoCard } from './product.model';
 
@@ -11,7 +11,7 @@ import { Priority, Product, ToDoCard } from './product.model';
 
 export class AppComponent {
   modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService) {}
+  constructor(private modalService: BsModalService) { }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template)
@@ -36,10 +36,10 @@ export class AppComponent {
   selectedComment: string = '';
 
   priorities: string[] = [
-    "No importante - No urgente",
+    `No importante - No urgente`,
     "Importante - No urgente",
-    "No importante - urgente",
-    "Importante - Urgente"
+    "No importante\nurgente",
+    "Importante\nUrgente"
   ]
 
   status: string[] = [
@@ -142,53 +142,42 @@ export class AppComponent {
     this.selectedComment = '';
   }
 
+  planificandoAPorHacer(index: number) {
+    this.toDoCards[index].status = this.status[1];
+  }
+
+  porHacerAEnProgreso(index: number) {
+    this.toDoCards[index].status = this.status[2];
+  }
+
+  enProgresoAFinalizado(index: number) {
+    this.toDoCards[index].status = this.status[3];
+  }
+
+  porHacerAPlanificando(index: number) {
+    this.toDoCards[index].status = this.status[0];
+  }
+
+  enProgresoAPorHacer(index: number) {
+    this.toDoCards[index].status = this.status[1];
+  }
+
+  finalizadoAEnProgreso(index: number) {
+    this.toDoCards[index].status = this.status[2];
+  }
+
+  alertConfirmDelete() {
+    return confirm("¿Está seguro de eliminar la nota?")
+  }
+
+  deleteNotita(index: number) {
+    this.alertConfirmDelete();
+    if (this.alertConfirmDelete()) {
+      window.location.href
+      this.toDoCards.splice(index, 1)
+    }
+  }
 
 
 
 }
-// @Component({
-//     selector: 'app-root',
-//     templateUrl: './app.component.html',
-//     styleUrls: ['./app.component.scss']
-//   })
-//   export class AppComponent implements OnInit {
-//     constructor(public modal:NgbModal) {}
-
-//     ngOnInit(): void {
-
-//     }
-//   }
-
-
-
-
-// @Component({
-//   selector: 'ngbd-modal-content',
-//   template: `
-//     <div class="modal-header">
-//       <h4 class="modal-title">Hi there!</h4>
-//       <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
-//     </div>
-//     <div class="modal-body">
-//       <p>Hello, {{name}}!</p>
-//     </div>
-//     <div class="modal-footer">
-//       <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-//     </div>
-//   `
-// })
-// export class NgbdModalContent {
-//   @Input() name: any;
-
-//   constructor(public activeModal: NgbActiveModal) {}
-// }
-
-// @Component({selector: 'ngbd-modal-component', templateUrl: './app.component.html'})
-// export class NgbdModalComponent {
-//   constructor(private modalService: NgbModal) {}
-
-//   open() {
-//     const modalRef = this.modalService.open(NgbdModalContent);
-//     modalRef.componentInstance.name = 'World';
-//   }
-// }

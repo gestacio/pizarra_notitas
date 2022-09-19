@@ -1,72 +1,95 @@
 <nav class="navbar header">
-  <div class="container ">
-    <a class="navbar-brand" href="#"><img src="../assets/images/RedWineSoftwares.png" alt="redwine" width="150"></a>
+  <div class="container">
+    <a class="navbar-brand" href="#"
+      ><img src="../assets/images/Logo.png" alt="redwine" width="150"
+    /></a>
     <div class="text-center">
-      <h1 class="lead">Pizarrita de tareas~</h1>
+      <h1 class="lead text-light">Pizarrita de tareas~</h1>
     </div>
   </div>
 </nav>
 
-
-
-
 <div class="bg-light py-5">
-
   <div class="container text-center">
-    <button type="button" class="btn btn-primary m-3 p-2 addNotita" (click)="openModal(modalMensaje)">
+    <button
+      type="button"
+      class="btn btn-primary m-3 p-2 text-light addNotita"
+      (click)="openModal(modalMensaje)"
+    >
       Clickeame para añadir una nueva notita c:
     </button>
   </div>
 
   <div class="container text-center pb-5">
-
-    <!-- <h3 class="text-center display">En el siguiente apartado podrás crear y ver tu lista de tareas</h3> -->
-    <br>
+    <br />
 
     <div class="container">
       <div class="row">
-
         <div class="col-3">
           <h3 class="display-6">Planificando</h3>
           <ul>
-            <div *ngFor="let toDoCard of toDoCards">
+            <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Planificando'">
-
                 <li class="planificando">
-                  <!-- <a href="#"> -->
+                  <a href="" (click)="deleteNotita(i)"
+                    ><div style="position: absolute; right: 10px; color: black">
+                      <i class="bi bi-trash"></i></div
+                  ></a>
+
                   <h6>{{ toDoCard.priority }}</h6>
-                  <hr>
+                  <hr />
+                  <div style="position: absolute; right: 10px">
+                    <i class="bi bi-pencil"></i>
+                  </div>
                   <h2>{{ toDoCard.name }}</h2>
                   <p>{{ toDoCard.comment }}</p>
-                  <hr>
-                  <h6>{{ toDoCard.category }}</h6>
-                  <!-- </a> -->
+                  <hr />
+                  <table style="margin: auto">
+                    <td>
+                      <button class="btn"></button>
+                    </td>
+                    <td>
+                      <h6>{{ toDoCard.category }}</h6>
+                    </td>
+                    <td>
+                      <button class="btn" (click)="planificandoAPorHacer(i)">
+                        >
+                      </button>
+                    </td>
+                  </table>
                 </li>
-
               </div>
             </div>
           </ul>
         </div>
 
-
         <div class="col-3">
           <h3 class="display-6">Por Hacer</h3>
           <ul>
-            <div *ngFor="let toDoCard of toDoCards">
+            <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Por hacer'">
-
-
                 <li class="porhacer">
-                  <!-- <a href="#"> -->
                   <h6>{{ toDoCard.priority }}</h6>
-                  <hr>
+                  <hr />
                   <h2>{{ toDoCard.name }}</h2>
                   <p>{{ toDoCard.comment }}</p>
-                  <hr>
-                  <h6>{{ toDoCard.category }}</h6>
-                  <!-- </a> -->
+                  <hr />
+                  <table style="margin: auto">
+                    <td>
+                      <button class="btn" (click)="porHacerAPlanificando(i)">
+                        <
+                      </button>
+                    </td>
+                    <td>
+                      <h6>{{ toDoCard.category }}</h6>
+                    </td>
+                    <td>
+                      <button class="btn" (click)="porHacerAEnProgreso(i)">
+                        >
+                      </button>
+                    </td>
+                  </table>
                 </li>
-
               </div>
             </div>
           </ul>
@@ -75,20 +98,30 @@
         <div class="col-3">
           <h3 class="display-6">En Progreso</h3>
           <ul>
-            <div *ngFor="let toDoCard of toDoCards">
+            <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'En progreso'">
-
                 <li class="enprogreso">
-                  <!-- <a href="#"> -->
                   <h6>{{ toDoCard.priority }}</h6>
-                  <hr>
+                  <hr />
                   <h2>{{ toDoCard.name }}</h2>
                   <p>{{ toDoCard.comment }}</p>
-                  <hr>
-                  <h6>{{ toDoCard.category }}</h6>
-                  <!-- </a> -->
+                  <hr />
+                  <table style="margin: auto">
+                    <td>
+                      <button class="btn" (click)="enProgresoAPorHacer(i)">
+                        <
+                      </button>
+                    </td>
+                    <td>
+                      <h6>{{ toDoCard.category }}</h6>
+                    </td>
+                    <td>
+                      <button class="btn" (click)="enProgresoAFinalizado(i)">
+                        >
+                      </button>
+                    </td>
+                  </table>
                 </li>
-
               </div>
             </div>
           </ul>
@@ -97,178 +130,232 @@
         <div class="col-3">
           <h3 class="display-6">Finalizado</h3>
           <ul>
-          <div *ngFor="let toDoCard of toDoCards">
-            <div *ngIf="toDoCard.status === 'Finalizado'">
-
-              <li class="finalizado">
-                <!-- <a href="#"> -->
-                <h6>{{ toDoCard.priority }}</h6>
-                <hr>
-                <h2>{{ toDoCard.name }}</h2>
-                <p>{{ toDoCard.comment }}</p>
-                <hr>
-                <h6>{{ toDoCard.category }}</h6>
-                <!-- </a> -->
-              </li>
-
+            <div *ngFor="let toDoCard of toDoCards; index as i">
+              <div *ngIf="toDoCard.status === 'Finalizado'">
+                <li class="finalizado">
+                  <h6>{{ toDoCard.priority }}</h6>
+                  <hr />
+                  <h2>{{ toDoCard.name }}</h2>
+                  <p>{{ toDoCard.comment }}</p>
+                  <hr />
+                  <table style="margin: auto">
+                    <td>
+                      <button class="btn" (click)="finalizadoAEnProgreso(i)">
+                        <
+                      </button>
+                    </td>
+                    <td>
+                      <h6>{{ toDoCard.category }}</h6>
+                    </td>
+                    <td>
+                      <button class="btn"></button>
+                    </td>
+                  </table>
+                </li>
+              </div>
             </div>
-          </div>
-        </ul>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- <hr> -->
-    <!-- <div class="container">
-      <div class="row">
-        <div *ngFor="let asd of toDoCards">
-          <div *ngIf="asd.status === 'Planificando'">
-            <p>{{ asd.name }}</p>
-            <p>{{ asd.priority }}</p>
-            <p>{{ asd.status }}</p>
-            <p>{{ asd.category }}</p>
-            <p>{{ asd.comment }}</p>
-          </div>
+          </ul>
         </div>
       </div>
     </div>
-  </div> -->
-
-
-
-
-    <!-- <button class="btn btn-danger">Hola</button> -->
-
   </div>
 
+  <footer>
+    <nav class="navbar fixed-bottom footer">
+      <div class="container">
+        <div class="lead text-light"><em> &copy; Redwine Softwares</em></div>
+      </div>
+    </nav>
+  </footer>
+</div>
+<!-- modal -->
+<ng-template #modalMensaje>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>Registra tu nueva tarea</span>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="toDoName">Nombre de la tarea</label>
+        <input
+          type="text"
+          class="form-control"
+          id="toDoName"
+          name="name"
+          [(ngModel)]="selectedName"
+        />
+        <br />
+      </div>
 
+      <div class="form-group">
+        <label for="priority">Nivel de prioridad</label>
+        <select
+          class="form-control"
+          id="priority"
+          name="priority"
+          [(ngModel)]="selectedPriority"
+        >
+          <option *ngFor="let priority of priorities" [value]="priority">
+            {{ priority }}
+          </option>
+        </select>
+      </div>
 
-  <!-- <ul>
-    <li>
-      <a href="#">
-        <h2>Title #1</h2>
-        <p>Text Content #1</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #2</h2>
-        <p>Text Content #2</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #3</h2>
-        <p>Text Content #3</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #4</h2>
-        <p>Text Content #4</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #5</h2>
-        <p>Text Content #5</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #6</h2>
-        <p>Text Content #6</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #2</h2>
-        <p>Text Content #2</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #7</h2>
-        <p>Text Content #7</p>
-      </a>
-    </li>
-    <li>
-      <a href="#">
-        <h2>Title #8</h2>
-        <p>Text Content #8</p>
-      </a>
-    </li>
-  </ul> -->
+      <br />
+      <div class="form-group">
+        <label for="status">Estado de la tarea</label>
+        <select
+          class="form-control"
+          id="status"
+          name="status"
+          [(ngModel)]="selectedStatus"
+        >
+          <option *ngFor="let stat of status" [value]="stat">
+            {{ stat }}
+          </option>
+        </select>
+      </div>
 
+      <br />
+      <div class="form-group">
+        <label for="category">Categoría</label>
+        <select
+          class="form-control"
+          id="category"
+          name="category"
+          [(ngModel)]="selectedCategory"
+        >
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <br />
 
+      <div class="form-group">
+        <label for="comment">Comentario</label>
+        <textarea
+          class="form-control"
+          id="comment"
+          rows="3"
+          name="comment"
+          [(ngModel)]="selectedComment"
+        ></textarea>
+      </div>
+      <br />
 
+      <input
+        type="submit"
+        class="btn btn-primary text-light"
+        (click)="addToDoCard(); modalRef.hide()"
+        value="Agregar"
+      />
+    </form>
+  </div>
+</ng-template>
 
-<footer>
-  <nav class="navbar fixed-bottom footer">
-    <div class="container">
-      <div class="lead"><em> &copy; Redwine Softwares</em></div>
-    </div>
-  </nav>
-</footer>
+<!-- modal -->
+<ng-template #modalConfirm>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>Está seguro de eliminar la notita?</span>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="toDoName">Nombre de la tarea</label>
+        <input
+          type="text"
+          class="form-control"
+          id="toDoName"
+          name="name"
+          [(ngModel)]="selectedName"
+        />
+        <br />
+      </div>
 
+      <div class="form-group">
+        <label for="priority">Nivel de prioridad</label>
+        <select
+          class="form-control"
+          id="priority"
+          name="priority"
+          [(ngModel)]="selectedPriority"
+        >
+          <option *ngFor="let priority of priorities" [value]="priority">
+            {{ priority }}
+          </option>
+        </select>
+      </div>
 
+      <br />
+      <div class="form-group">
+        <label for="status">Estado de la tarea</label>
+        <select
+          class="form-control"
+          id="status"
+          name="status"
+          [(ngModel)]="selectedStatus"
+        >
+          <option *ngFor="let stat of status" [value]="stat">
+            {{ stat }}
+          </option>
+        </select>
+      </div>
 
+      <br />
+      <div class="form-group">
+        <label for="category">Categoría</label>
+        <select
+          class="form-control"
+          id="category"
+          name="category"
+          [(ngModel)]="selectedCategory"
+        >
+          <option *ngFor="let category of categories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+      </div>
+      <br />
 
+      <div class="form-group">
+        <label for="comment">Comentario</label>
+        <textarea
+          class="form-control"
+          id="comment"
+          rows="3"
+          name="comment"
+          [(ngModel)]="selectedComment"
+        ></textarea>
+      </div>
+      <br />
 
-
-  <!-- modal -->
-  <ng-template #modalMensaje>
-    <div class="modal-header">
-      <h4 class="modal-title">
-        <span>Registra tu nueva tarea</span>
-      </h4>
-      <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="toDoName">Nombre de la tarea</label>
-          <input type="text" class="form-control" id="toDoName" name="name" [(ngModel)]="selectedName">
-          <br>
-        </div>
-
-        <div class="form-group">
-          <label for="priority">Nivel de prioridad</label>
-          <select class="form-control" id="priority" name="priority" [(ngModel)]="selectedPriority">
-            <option *ngFor="let priority of priorities" [value]="priority">{{ priority }}
-            </option>
-          </select>
-        </div>
-
-        <br>
-        <div class="form-group">
-          <label for="status">Estado de la tarea</label>
-          <select class="form-control" id="status" name="status" [(ngModel)]="selectedStatus">
-            <option *ngFor="let stat of status" [value]="stat">{{ stat }}</option>
-          </select>
-        </div>
-
-        <br>
-        <div class="form-group">
-          <label for="category">Categoría</label>
-          <select class="form-control" id="category" name="category" [(ngModel)]="selectedCategory">
-            <option *ngFor="let category of categories" [value]="category">{{ category }}
-            </option>
-          </select>
-        </div>
-        <br>
-
-
-        <div class="form-group">
-          <label for="comment">Comentario</label>
-          <textarea class="form-control" id="comment" rows="3" name="comment" [(ngModel)]="selectedComment"></textarea>
-        </div>
-        <br>
-
-        <input type="submit" class="btn btn-primary" (click)="addToDoCard(); modalRef.hide()" value="Agregar">
-      </form>
-    </div>
-  </ng-template>
+      <input
+        type="submit"
+        class="btn btn-primary text-light"
+        (click)="addToDoCard(); modalRef.hide()"
+        value="Agregar"
+      />
+    </form>
+  </div>
+</ng-template>

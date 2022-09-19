@@ -4,8 +4,8 @@ import { ModalComponent } from './modal/modal.component';
 
 
 const routes: Routes = [
-  { path: 'modal', component: ModalComponent },
-  { path: '**', pathMatch:'full', redirectTo:'modal' },
+  // { path: 'modal', component: ModalComponent },
+  // { path: '**', pathMatch:'full', redirectTo:'modal' },
 ];
 
 @NgModule({
