@@ -31,10 +31,9 @@
             <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Planificando'">
                 <li class="planificando">
-                  <a href="" (click)="deleteNotita(i)"
-                    ><div style="position: absolute; right: 10px; color: black">
-                      <i class="bi bi-trash"></i></div
-                  ></a>
+                  <a href="#" (click)="openModal(modalConfirmDelete)">
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                  </a>
 
                   <h6>{{ toDoCard.priority }}</h6>
                   <hr />
@@ -69,6 +68,9 @@
             <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Por hacer'">
                 <li class="porhacer">
+                  <a href="#" (click)="openModal(modalConfirmDelete)">
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                  </a>
                   <h6>{{ toDoCard.priority }}</h6>
                   <hr />
                   <h2>{{ toDoCard.name }}</h2>
@@ -101,6 +103,9 @@
             <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'En progreso'">
                 <li class="enprogreso">
+                  <a href="#" (click)="openModal(modalConfirmDelete)">
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                  </a>
                   <h6>{{ toDoCard.priority }}</h6>
                   <hr />
                   <h2>{{ toDoCard.name }}</h2>
@@ -133,6 +138,9 @@
             <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Finalizado'">
                 <li class="finalizado">
+                  <a href="#" (click)="openModal(modalConfirmDelete)">
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                  </a>
                   <h6>{{ toDoCard.priority }}</h6>
                   <hr />
                   <h2>{{ toDoCard.name }}</h2>
@@ -265,97 +273,19 @@
 </ng-template>
 
 <!-- modal -->
-<ng-template #modalConfirm>
+<ng-template #modalConfirmDelete let-i="i">
   <div class="modal-header">
     <h4 class="modal-title">
       <span>Está seguro de eliminar la notita?</span>
     </h4>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="modalRef.hide()"
-    >
+    <button type="button" class="close" aria-label="Cancelar" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
-  <div class="modal-body">
-    <form>
-      <div class="form-group">
-        <label for="toDoName">Nombre de la tarea</label>
-        <input
-          type="text"
-          class="form-control"
-          id="toDoName"
-          name="name"
-          [(ngModel)]="selectedName"
-        />
-        <br />
-      </div>
-
-      <div class="form-group">
-        <label for="priority">Nivel de prioridad</label>
-        <select
-          class="form-control"
-          id="priority"
-          name="priority"
-          [(ngModel)]="selectedPriority"
-        >
-          <option *ngFor="let priority of priorities" [value]="priority">
-            {{ priority }}
-          </option>
-        </select>
-      </div>
-
-      <br />
-      <div class="form-group">
-        <label for="status">Estado de la tarea</label>
-        <select
-          class="form-control"
-          id="status"
-          name="status"
-          [(ngModel)]="selectedStatus"
-        >
-          <option *ngFor="let stat of status" [value]="stat">
-            {{ stat }}
-          </option>
-        </select>
-      </div>
-
-      <br />
-      <div class="form-group">
-        <label for="category">Categoría</label>
-        <select
-          class="form-control"
-          id="category"
-          name="category"
-          [(ngModel)]="selectedCategory"
-        >
-          <option *ngFor="let category of categories" [value]="category">
-            {{ category }}
-          </option>
-        </select>
-      </div>
-      <br />
-
-      <div class="form-group">
-        <label for="comment">Comentario</label>
-        <textarea
-          class="form-control"
-          id="comment"
-          rows="3"
-          name="comment"
-          [(ngModel)]="selectedComment"
-        ></textarea>
-      </div>
-      <br />
-
-      <input
-        type="submit"
-        class="btn btn-primary text-light"
-        (click)="addToDoCard(); modalRef.hide()"
-        value="Agregar"
-      />
-    </form>
-  </div>
+  <!-- <div class="modal-body"> -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary text-light" (click)="deleteNotita(i); modalRef.hide()">Aceptar</button>
+          <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
+        </div>
+  <!-- </div> -->
 </ng-template>

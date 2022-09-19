@@ -171,11 +171,12 @@ export class AppComponent {
   }
 
   deleteNotita(index: number) {
-    this.alertConfirmDelete();
-    if (this.alertConfirmDelete()) {
-      window.location.href
-      this.toDoCards.splice(index, 1)
-    }
+    // this.alertConfirmDelete();
+    // if (this.alertConfirmDelete()) {
+    //   window.location.href
+    //   this.toDoCards.splice(index, 1)
+    // }
+    this.toDoCards.splice(index, 1)
   }
 
 
