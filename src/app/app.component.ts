@@ -57,42 +57,41 @@ export class AppComponent {
   ]
 
 
-
   toDoCards: ToDoCard[] = [
     {
-      name: "Mi primera tarjeta",
-      priority: "Nada Alarmante",
-      status: "Planificando",
-      category: "Planificando",
-      comment: "no poseo comentarios"
+      name: "Estudiar Angular",
+      priority: this.priorities[1],
+      status: this.status[0],
+      category: this.categories[3],
+      comment: "Esta es una web para crear notitas de recordatorio de forma organizada"
     },
     {
       name: "Mi primera tarjeta",
-      priority: "Nada Alarmante",
-      status: "Planificando",
-      category: "Planificando",
+      priority: this.priorities[0],
+      status: this.status[0],
+      category: this.categories[0],
       comment: "no poseo comentarios"
     },
     {
-      name: "Mi primera tarjeta",
-      priority: "Nada Alarmante",
-      status: "Por hacer",
-      category: "Por hacer",
-      comment: "no poseo comentarios"
+      name: "MySQL o MongoDB?",
+      priority: this.priorities[0],
+      status: this.status[1],
+      category: this.categories[2],
+      comment: "En el siguiente paso, estudiaré cómo integrar consultas de bases de datos a esta web"
     },
     {
-      name: "Mi primera tarjeta",
-      priority: "Nada Alarmante",
-      status: "En progreso",
-      category: "En progreso",
-      comment: "no poseo comentarios"
+      name: "Curso Platzi Angular",
+      priority: this.priorities[2],
+      status: this.status[2],
+      category: this.categories[1],
+      comment: "Mientras tanto, seguiré dándole con todo a Angular 👊"
     },
     {
-      name: "Mi primera tarjeta",
-      priority: "Nada Alarmante",
-      status: "Finalizado",
-      category: "De flojera",
-      comment: "no poseo comentarios"
+      name: "Nunca Pares de Aprender",
+      priority: this.priorities[3],
+      status: this.status[3],
+      category: this.categories[0],
+      comment: "Primera fase del curso básico completado, seguimos y seguiremos por más ♥"
     },
   ]
 

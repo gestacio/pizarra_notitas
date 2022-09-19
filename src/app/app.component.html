@@ -1,35 +1,21 @@
-<nav class="navbar navbar-dark bg-dark">
+<nav class="navbar header">
   <div class="container ">
     <a class="navbar-brand" href="#"><img src="../assets/images/RedWineSoftwares.png" alt="redwine" width="150"></a>
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    </button> -->
     <div class="text-center">
-
-      <h1 class="text-light lead">Pizarrita de tareas~</h1>
+      <h1 class="lead">Pizarrita de tareas~</h1>
     </div>
-    <!-- <div class="container text-center">
-
-    </div> -->
   </div>
 </nav>
-
-<!-- <div class="bg-dark"></div> -->
 
 
 
 
 <div class="bg-light py-5">
-  <!-- <div class="container text-center">
-    <h1>🌟 To Do List 🌟</h1>
-  </div> -->
-
-  <!-- <hr class="mx-5"> -->
-  <!-- gap -->
 
   <div class="container text-center">
-    <button type="button" class="btn btn-primary m-3 p-2" (click)="openModal(modalMensaje)">Añadir nueva
-      notita~</button>
+    <button type="button" class="btn btn-primary m-3 p-2 addNotita" (click)="openModal(modalMensaje)">
+      Clickeame para añadir una nueva notita c:
+    </button>
   </div>
 
   <div class="container text-center pb-5">
@@ -38,10 +24,10 @@
     <br>
 
     <div class="container">
-
       <div class="row">
 
         <div class="col-3">
+          <h3 class="display-6">Planificando</h3>
           <ul>
             <div *ngFor="let toDoCard of toDoCards">
               <div *ngIf="toDoCard.status === 'Planificando'">
@@ -61,22 +47,14 @@
             </div>
           </ul>
         </div>
-        <!-- <div class="nota-planificando">
 
-              <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                <div class="card-header">{{ toDoCard.priority }}</div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ toDoCard.name }}</h5>
-                  <p class="card-text">{{ toDoCard.comment }}</p>
-                  <div class="card-footer">{{ toDoCard.category }}</div>
-                </div>
-              </div>
-            </div> -->
 
         <div class="col-3">
+          <h3 class="display-6">Por Hacer</h3>
           <ul>
             <div *ngFor="let toDoCard of toDoCards">
               <div *ngIf="toDoCard.status === 'Por hacer'">
+
 
                 <li class="porhacer">
                   <!-- <a href="#"> -->
@@ -95,6 +73,7 @@
         </div>
 
         <div class="col-3">
+          <h3 class="display-6">En Progreso</h3>
           <ul>
             <div *ngFor="let toDoCard of toDoCards">
               <div *ngIf="toDoCard.status === 'En progreso'">
@@ -116,6 +95,7 @@
         </div>
 
         <div class="col-3">
+          <h3 class="display-6">Finalizado</h3>
           <ul>
           <div *ngFor="let toDoCard of toDoCards">
             <div *ngIf="toDoCard.status === 'Finalizado'">
@@ -224,23 +204,13 @@
 
 
 
-
-  <nav class="navbar fixed-bottom navbar-dark bg-dark">
-    <div class="container text-center">
-      <!-- <a class="navbar-brand" href="#"><img src="../assets/images/RedWineSoftwares.png" alt="redwine" width="150"></a> -->
-      <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    </button> -->
-      <!-- <div class="text-center">
-
-      <h1 class="text-light lead">Pizarrita de tareas~</h1>
-    </div> -->
-      <!-- <div class="container text-center">
-
-    </div> -->
-      <div class="lead text-light"><em> &copy; Redwine Softwares</em></div>
+<footer>
+  <nav class="navbar fixed-bottom footer">
+    <div class="container">
+      <div class="lead"><em> &copy; Redwine Softwares</em></div>
     </div>
   </nav>
+</footer>
 
 
 
