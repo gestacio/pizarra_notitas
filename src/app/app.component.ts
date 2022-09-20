@@ -17,6 +17,14 @@ export class AppComponent {
     this.modalRef = this.modalService.show(template)
   }
 
+
+
+  // templateConfirmDelete = ``
+
+  // modalConfirmDelete(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template)
+  // }
+
   name = 'Gabriel';
   age = 25;
   img = "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/301998180_5755191261158931_7184967016156864645_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Rwc84uAw6HUAX9IN3ZC&_nc_ht=scontent-mia3-1.xx&oh=00_AT8Q0ey7orQTr49nJJpsBTLmSSK-583gTqjiT3z2Fo3PwQ&oe=6327DFA2"
@@ -29,6 +37,8 @@ export class AppComponent {
 
 
 
+
+
   selectedName: string = '';
   selectedPriority: string = '';
   selectedStatus: string = '';
@@ -38,8 +48,8 @@ export class AppComponent {
   priorities: string[] = [
     `No importante - No urgente`,
     "Importante - No urgente",
-    "No importante\nurgente",
-    "Importante\nUrgente"
+    "No importante - urgente",
+    "Importante - Urgente"
   ]
 
   status: string[] = [
@@ -95,6 +105,9 @@ export class AppComponent {
     },
   ]
 
+  index: number = 0;
+  selectedNotita = this.toDoCards[this.index];
+
   toggleButton() {
     this.btnDisabled = !this.btnDisabled
   }
@@ -126,22 +139,6 @@ export class AppComponent {
     alert(arg);
   }
 
-  addToDoCard() {
-    this.toDoCards.push({
-      name: this.selectedName,
-      priority: this.selectedPriority,
-      status: this.selectedStatus,
-      category: this.selectedCategory,
-      comment: this.selectedComment,
-    })
-
-    this.selectedName = '';
-    this.selectedPriority = '';
-    this.selectedStatus = '';
-    this.selectedCategory = '';
-    this.selectedComment = '';
-  }
-
   planificandoAPorHacer(index: number) {
     this.toDoCards[index].status = this.status[1];
   }
@@ -166,18 +163,75 @@ export class AppComponent {
     this.toDoCards[index].status = this.status[2];
   }
 
-  alertConfirmDelete() {
-    return confirm("¿Está seguro de eliminar la nota?")
+  replaceIndex(index: number, template: TemplateRef<any>) {
+    this.index = index;
+    this.openModal(template)
   }
 
-  deleteNotita(index: number) {
-    // this.alertConfirmDelete();
-    // if (this.alertConfirmDelete()) {
-    //   window.location.href
-    //   this.toDoCards.splice(index, 1)
-    // }
-    this.toDoCards.splice(index, 1)
+  confirmRequiredInputs() {
+    if (!this.selectedName) {
+      alert("Nombre de la nota es requerido")
+      return false
+    }
+
+    if (!this.selectedPriority) {
+      alert("Prioridad de la nota es requerido");
+      return false;
+    }
+
+    if (!this.selectedStatus) {
+      alert("Estado de la nota es requerido");
+      return false;
+    }
+
+    if (!this.selectedCategory) {
+      alert("Categoría de la nota es requerido");
+      return false;
+    }
+
+    return true;
   }
+
+  addNotita() {
+    if (this.confirmRequiredInputs()) {
+      this.toDoCards.push({
+      name: this.selectedName,
+      priority: this.selectedPriority,
+      status: this.selectedStatus,
+      category: this.selectedCategory,
+      comment: this.selectedComment,
+      })
+
+      this.selectedName = '';
+      this.selectedPriority = '';
+      this.selectedStatus = '';
+      this.selectedCategory = '';
+      this.selectedComment = '';
+      this.modalRef.hide();
+    }
+  }
+
+  editNotita() {
+    if (this.confirmRequiredInputs()) {
+      this.toDoCards[this.index].name = this.selectedName
+      this.toDoCards[this.index].priority = this.selectedPriority,
+      this.toDoCards[this.index].status = this.selectedStatus,
+      this.toDoCards[this.index].category = this.selectedCategory,
+      this.toDoCards[this.index].comment = this.selectedComment,
+
+      this.selectedName = '';
+      this.selectedPriority = '';
+      this.selectedStatus = '';
+      this.selectedCategory = '';
+      this.selectedComment = '';
+      this.modalRef.hide()
+    }
+  }
+
+  deleteNotita() {
+    this.toDoCards.splice(this.index, 1)
+  }
+
 
 
 
