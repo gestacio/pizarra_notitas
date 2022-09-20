@@ -17,14 +17,6 @@ export class AppComponent {
     this.modalRef = this.modalService.show(template)
   }
 
-
-
-  // templateConfirmDelete = ``
-
-  // modalConfirmDelete(template: TemplateRef<any>) {
-  //   this.modalRef = this.modalService.show(template)
-  // }
-
   name = 'Gabriel';
   age = 25;
   img = "https://scontent-mia3-1.xx.fbcdn.net/v/t39.30808-6/301998180_5755191261158931_7184967016156864645_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=Rwc84uAw6HUAX9IN3ZC&_nc_ht=scontent-mia3-1.xx&oh=00_AT8Q0ey7orQTr49nJJpsBTLmSSK-583gTqjiT3z2Fo3PwQ&oe=6327DFA2"
