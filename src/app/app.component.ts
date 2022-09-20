@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Priority, Product, ToDoCard } from './product.model';
 
@@ -11,11 +11,12 @@ import { Priority, Product, ToDoCard } from './product.model';
 
 export class AppComponent {
   modalRef!: BsModalRef;
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService,) { }
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template)
   }
+
 
   name = 'Gabriel';
   age = 25;
@@ -58,7 +59,6 @@ export class AppComponent {
     "Hobby"
   ]
 
-
   toDoCards: ToDoCard[] = [
     {
       name: "Estudiar Angular",
@@ -72,7 +72,7 @@ export class AppComponent {
       priority: this.priorities[0],
       status: this.status[0],
       category: this.categories[0],
-      comment: "no poseo comentarios"
+      comment: "No poseo comentarios"
     },
     {
       name: "MySQL o MongoDB?",
@@ -96,6 +96,8 @@ export class AppComponent {
       comment: "Primera fase del curso básico completado, seguimos y seguiremos por más ♥"
     },
   ]
+
+  recycleBin: ToDoCard[] = []
 
   index: number = 0;
   selectedNotita = this.toDoCards[this.index];
@@ -187,11 +189,11 @@ export class AppComponent {
   addNotita() {
     if (this.confirmRequiredInputs()) {
       this.toDoCards.push({
-      name: this.selectedName,
-      priority: this.selectedPriority,
-      status: this.selectedStatus,
-      category: this.selectedCategory,
-      comment: this.selectedComment,
+        name: this.selectedName,
+        priority: this.selectedPriority,
+        status: this.selectedStatus,
+        category: this.selectedCategory,
+        comment: this.selectedComment,
       })
 
       this.selectedName = '';
@@ -207,11 +209,11 @@ export class AppComponent {
     if (this.confirmRequiredInputs()) {
       this.toDoCards[this.index].name = this.selectedName
       this.toDoCards[this.index].priority = this.selectedPriority,
-      this.toDoCards[this.index].status = this.selectedStatus,
-      this.toDoCards[this.index].category = this.selectedCategory,
-      this.toDoCards[this.index].comment = this.selectedComment,
+        this.toDoCards[this.index].status = this.selectedStatus,
+        this.toDoCards[this.index].category = this.selectedCategory,
+        this.toDoCards[this.index].comment = this.selectedComment,
 
-      this.selectedName = '';
+        this.selectedName = '';
       this.selectedPriority = '';
       this.selectedStatus = '';
       this.selectedCategory = '';
@@ -220,11 +222,50 @@ export class AppComponent {
     }
   }
 
-  deleteNotita() {
+  recycleNotita() {
+
+    this.recycleBin.push({
+      name: this.toDoCards[this.index].name,
+      priority: this.toDoCards[this.index].priority,
+      status: this.toDoCards[this.index].status,
+      category: this.toDoCards[this.index].category,
+      comment: this.toDoCards[this.index].comment,
+    })
+
+    this.selectedName = '';
+    this.selectedPriority = '';
+    this.selectedStatus = '';
+    this.selectedCategory = '';
+    this.selectedComment = '';
+    this.modalRef.hide();
+
     this.toDoCards.splice(this.index, 1)
+    console.log(this.recycleBin[0].name);
+
   }
 
+  restoreNotita() {
+    this.toDoCards.push({
+      name: this.recycleBin[this.index].name,
+      priority: this.recycleBin[this.index].priority,
+      status: this.recycleBin[this.index].status,
+      category: this.recycleBin[this.index].category,
+      comment: this.recycleBin[this.index].comment,
+    })
 
+    this.selectedName = '';
+    this.selectedPriority = '';
+    this.selectedStatus = '';
+    this.selectedCategory = '';
+    this.selectedComment = '';
+    this.modalRef.hide();
 
+    this.recycleBin.splice(this.index, 1)
+  }
+
+  deleteNotita() {
+    this.recycleBin.splice(this.index, 1)
+    this.modalRef.hide();
+  }
 
 }

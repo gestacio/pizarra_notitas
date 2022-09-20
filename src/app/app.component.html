@@ -1,3 +1,7 @@
+<a href="#" (click)="openModal(modalRecycleBin)">
+  <div class="recycleBin" triggers="mouseenter:mouseleave" ngbPopover="Papelera de Reciclaje" placement="left"><i class="bi bi-trash2"></i></div>
+</a>
+
 <nav class="navbar header">
   <div class="container">
     <a class="navbar-brand" href="#"><img src="../assets/images/Logo.png" alt="redwine" width="150" /></a>
@@ -20,13 +24,13 @@
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <h3 class="display-6">Planificando</h3>
+          <h2 class="display-6">Planificando</h2>
           <ul>
             <div *ngFor="let toDoCard of toDoCards; index as i">
               <div *ngIf="toDoCard.status === 'Planificando'">
                 <li class="planificando">
                   <a href="#" (click)="replaceIndex(i, modalConfirmDelete); ">
-                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash3"></i></div>
                   </a>
 
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
@@ -61,7 +65,7 @@
               <div *ngIf="toDoCard.status === 'Por hacer'">
                 <li class="porhacer">
                   <a href="#" (click)="replaceIndex(i, modalConfirmDelete); ">
-                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash3"></i></div>
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
@@ -95,7 +99,7 @@
               <div *ngIf="toDoCard.status === 'En progreso'">
                 <li class="enprogreso">
                   <a href="#" (click)="replaceIndex(i, modalConfirmDelete); ">
-                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash3"></i></div>
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
@@ -129,7 +133,7 @@
               <div *ngIf="toDoCard.status === 'Finalizado'">
                 <li class="finalizado">
                   <a href="#" (click)="replaceIndex(i, modalConfirmDelete); ">
-                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash"></i></div>
+                    <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash3"></i></div>
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
@@ -162,7 +166,7 @@
   <footer>
     <nav class="navbar fixed-bottom footer">
       <div class="container">
-        <div class="lead text-light"><em> &copy; Redwine Softwares</em></div>
+        <div class="text-light copyright"><em>copyright: 2022 | &copy; Redwine Softwares</em></div>
       </div>
     </nav>
   </footer>
@@ -174,8 +178,8 @@
     <h4 class="modal-title">
       <span>Registra tu nueva tarea</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
     </button>
   </div>
   <div class="modal-body">
@@ -237,8 +241,8 @@
     <h4 class="modal-title">
       <span>Edita tu notita</span>
     </h4>
-    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
     </button>
   </div>
   <div class="modal-body">
@@ -293,20 +297,101 @@
   </div>
 </ng-template>
 
-
-
 <!-- modal -->
 <ng-template #modalConfirmDelete>
   <div class="modal-header">
     <h4 class="modal-title">
       <span>Está seguro de eliminar la notita?</span>
     </h4>
-    <button type="button" class="close" aria-label="Cancelar" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
     </button>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary text-light" (click)="deleteNotita(); modalRef.hide()">Aceptar</button>
+    <!-- <button type="button" class="btn btn-primary text-light" (click)="deleteNotita(); modalRef.hide()">Aceptar</button> -->
+    <button type="button" class="btn btn-primary text-light" (click)="recycleNotita()">Aceptar</button>
+    <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>
+
+
+<!-- modal -->
+<ng-template #modalRecycleBin>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>Papelera de reciclaje</span>
+    </h4>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+
+      <div *ngFor="let recycleCard of recycleBin; index as i">
+        <li class="recycleCard">
+          <a href="#" (click)="replaceIndex(i, modalPermanentDeleteNotita); ">
+            <div style="position: absolute; right: 10px; color: black"><i class="bi bi-trash3"></i></div>
+          </a>
+          <h6 class="mx-2">{{ recycleCard.priority }}</h6>
+          <hr />
+          <a href="#" (click)="replaceIndex(i, modalRestoreNotita);">
+            <div style="position: absolute; right: 10px; color: black"><i class="bi bi-arrow-counterclockwise"></i></div>
+          </a>
+          <h2 class="mx-2">{{ recycleCard.name }}</h2>
+          <p>{{ recycleCard.comment }}</p>
+          <hr />
+          <table style="margin: auto">
+            <td>
+            </td>
+            <td>
+              <h6>{{ recycleCard.category }}</h6>
+            </td>
+            <td>
+            </td>
+          </table>
+        </li>
+        <br>
+        <br>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>
+
+
+<!-- modal -->
+<ng-template #modalRestoreNotita>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>Está seguro que desea restaurar la notita?</span>
+    </h4>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary text-light" (click)="restoreNotita()">Restaurar</button>
+    <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
+  </div>
+</ng-template>
+
+
+<!-- modal -->
+<ng-template #modalPermanentDeleteNotita>
+  <div class="modal-header">
+    <h4 class="modal-title">
+      <span>¿Eliminar permanentemente la notita?</span>
+    </h4>
+    <button class="btn " (click)="modalRef.hide()">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary text-light" (click)="deleteNotita()">Eliminar</button>
     <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
   </div>
 </ng-template>
