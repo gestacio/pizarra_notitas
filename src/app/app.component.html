@@ -186,39 +186,87 @@
     <form>
       <div class="form-group">
         <label for="toDoName">Nombre de la tarea</label>
-        <input type="text" class="form-control" id="toDoName" name="name" [(ngModel)]="selectedName" required/>
-        <br />
+        <input
+        type="text"
+        class="form-control"
+        id="toDoName"
+        name="name"
+        [(ngModel)]="selectedName"
+        #inputName="ngModel"
+        [ngClass]="{
+          'valid': inputName.valid,
+          'invalid': inputName.invalid
+        }"
+        required/>
+        <p class="message-error" [class.invalid]="inputName.invalid">
+          El campo es requerido
+        </p>
       </div>
 
       <div class="form-group">
         <label for="priority">Nivel de prioridad</label>
-        <select class="form-control" id="priority" name="priority" [(ngModel)]="selectedPriority" required>
+        <select
+        class="form-control"
+        id="priority"
+        name="priority"
+        [(ngModel)]="selectedPriority"
+        #inputPriority="ngModel"
+        [ngClass]="{
+          'valid': inputPriority.valid,
+          'invalid': inputPriority.invalid
+        }"
+        required>
           <option *ngFor="let priority of priorities" [value]="priority">
             {{ priority }}
           </option>
         </select>
+        <p class="message-error" [class.invalid]="inputPriority.invalid">
+          El campo es requerido
+        </p>
       </div>
 
-      <br />
       <div class="form-group">
         <label for="status">Estado de la tarea</label>
-        <select class="form-control" id="status" name="status" [(ngModel)]="selectedStatus" required>
+        <select
+        class="form-control"
+        id="status" name="status"
+        [(ngModel)]="selectedStatus"
+        #inputStatus="ngModel"
+        [ngClass]="{
+          'valid': inputStatus.valid,
+          'invalid': inputStatus.invalid
+        }"
+        required>
           <option *ngFor="let stat of status" [value]="stat">
             {{ stat }}
           </option>
         </select>
+        <p class="message-error" [class.invalid]="inputStatus.invalid">
+          El campo es requerido
+        </p>
       </div>
 
-      <br />
       <div class="form-group">
         <label for="category">Categoría</label>
-        <select class="form-control" id="category" name="category" [(ngModel)]="selectedCategory" required>
+        <select
+        class="form-control"
+        id="category"
+        name="category"
+        [(ngModel)]="selectedCategory"
+        #inputCategory="ngModel"
+        [ngClass]="{
+          'valid': inputCategory.valid,
+          'invalid': inputCategory.invalid
+        }"
+        required>
           <option *ngFor="let category of categories" [value]="category">
             {{ category }}
           </option>
         </select>
+        <p class="message-error" [class.invalid]="inputCategory.invalid">
+          El campo es requerido
+        </p>
       </div>
-      <br />
 
       <div class="form-group">
         <label for="comment">Comentario</label>
@@ -246,11 +294,28 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form #formEditNotita="ngForm">
       <div class="form-group">
         <label for="toDoName">Nombre de la tarea</label>
-        <input type="text" class="form-control" id="toDoName" name="name" [(ngModel)]="selectedName" required/>
-        <br />
+        <input
+        type="text"
+        class="form-control"
+        id="toDoName"
+        name="name"
+
+        value="{{selectedNotita.name}}"
+
+        (focus)="selectedName = selectedNotita.name"
+        [(ngModel)]="selectedName"
+        #inputName="ngModel"
+        [ngClass]="{
+          'valid': selectedName,
+          'invalid': !selectedName
+        }"
+        required/>
+        <p class="message-error" [class.invalid]="!selectedName">
+          El campo es requerido
+        </p>
       </div>
 
       <div class="form-group">
@@ -290,7 +355,7 @@
       <br />
 
       <div class="modal-footer">
-        <input type="submit" class="btn btn-primary text-light" (click)="editNotita(); " value="Editar" />
+        <input [disabled]="formEditNotita.invalid" type="submit" class="btn btn-primary text-light" (click)="editNotita(); " value="Editar" />
         <button type="button" class="btn btn-primary text-light" (click)="modalRef.hide()">Cancelar</button>
       </div>
     </form>
