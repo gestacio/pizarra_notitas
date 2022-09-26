@@ -193,11 +193,7 @@ export class AppComponent {
         comment: this.selectedComment,
       })
 
-      this.selectedName = '';
-      this.selectedPriority = '';
-      this.selectedStatus = '';
-      this.selectedCategory = '';
-      this.selectedComment = '';
+      this.cleanSelectedItems();
       this.modalRef.hide();
     }
   }
@@ -210,11 +206,7 @@ export class AppComponent {
         this.toDoCards[this.index].category = this.selectedCategory,
         this.toDoCards[this.index].comment = this.selectedComment,
 
-        this.selectedName = '';
-      this.selectedPriority = '';
-      this.selectedStatus = '';
-      this.selectedCategory = '';
-      this.selectedComment = '';
+        this.cleanSelectedItems();
       this.modalRef.hide()
     }
   }
@@ -229,11 +221,7 @@ export class AppComponent {
       comment: this.toDoCards[this.index].comment,
     })
 
-    this.selectedName = '';
-    this.selectedPriority = '';
-    this.selectedStatus = '';
-    this.selectedCategory = '';
-    this.selectedComment = '';
+    this.cleanSelectedItems();
     this.modalRef.hide();
 
     this.toDoCards.splice(this.index, 1)
@@ -250,11 +238,7 @@ export class AppComponent {
       comment: this.recycleBin[this.index].comment,
     })
 
-    this.selectedName = '';
-    this.selectedPriority = '';
-    this.selectedStatus = '';
-    this.selectedCategory = '';
-    this.selectedComment = '';
+    this.cleanSelectedItems();
     this.modalRef.hide();
 
     this.recycleBin.splice(this.index, 1)
@@ -273,6 +257,14 @@ export class AppComponent {
     this.selectedStatus = this.selectedNotita.status;
     this.selectedCategory = this.selectedNotita.category;
     this.selectedComment = this.selectedNotita.comment;
+  }
+
+  cleanSelectedItems() {
+    this.selectedName = '';
+    this.selectedPriority = '';
+    this.selectedStatus = '';
+    this.selectedCategory = '';
+    this.selectedComment = '';
   }
 
 }
