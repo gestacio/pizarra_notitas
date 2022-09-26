@@ -35,7 +35,7 @@
 
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
-                  <a href="#" (click)="replaceIndex(i, modalEditNotita);">
+                  <a href="#" (click)="replaceIndex(i, modalEditNotita); updateSelectedNotita()">
                     <div style="position: absolute; right: 10px; color: black"><i class="bi bi-pencil"></i></div>
                   </a>
                   <h2 class="mx-2">{{ toDoCard.name }}</h2>
@@ -69,7 +69,7 @@
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
-                  <a href="#" (click)="replaceIndex(i, modalEditNotita);">
+                  <a href="#" (click)="replaceIndex(i, modalEditNotita); updateSelectedNotita()">
                     <div style="position: absolute; right: 10px; color: black"><i class="bi bi-pencil"></i></div>
                   </a>
                   <h2 class="mx-2">{{ toDoCard.name }}</h2>
@@ -103,7 +103,7 @@
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
-                  <a href="#" (click)="replaceIndex(i, modalEditNotita);">
+                  <a href="#" (click)="replaceIndex(i, modalEditNotita); updateSelectedNotita()">
                     <div style="position: absolute; right: 10px; color: black"><i class="bi bi-pencil"></i></div>
                   </a>
                   <h2 class="mx-2">{{ toDoCard.name }}</h2>
@@ -137,7 +137,7 @@
                   </a>
                   <h6 class="mx-2">{{ toDoCard.priority }}</h6>
                   <hr />
-                  <a href="#" (click)="replaceIndex(i, modalEditNotita);">
+                  <a href="#" (click)="replaceIndex(i, modalEditNotita); updateSelectedNotita()">
                     <div style="position: absolute; right: 10px; color: black"><i class="bi bi-pencil"></i></div>
                   </a>
                   <h2 class="mx-2">{{ toDoCard.name }}</h2>
@@ -302,12 +302,9 @@
         class="form-control"
         id="toDoName"
         name="name"
-
-        value="{{selectedNotita.name}}"
-
-        (focus)="selectedName = selectedNotita.name"
         [(ngModel)]="selectedName"
         #inputName="ngModel"
+        [value]="selectedName"
         [ngClass]="{
           'valid': selectedName,
           'invalid': !selectedName

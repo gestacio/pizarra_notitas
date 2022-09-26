@@ -33,7 +33,7 @@ export class AppComponent {
   selectedPriority: string = '';
   selectedStatus: string = '';
   selectedCategory: string = '';
-  selectedComment: string = '';
+  selectedComment?: string = '';
 
   priorities: string[] = [
     `No importante - No urgente`,
@@ -265,8 +265,14 @@ export class AppComponent {
     this.modalRef.hide();
   }
 
-  // updatedSelectedToDo() {
-  //   this.selectedName = this.selectedNotita.name;
-  // }
+  updateSelectedNotita() {
+    this.selectedNotita = this.toDoCards[this.index];
+
+    this.selectedName = this.selectedNotita.name;
+    this.selectedPriority = this.selectedNotita.priority;
+    this.selectedStatus = this.selectedNotita.status;
+    this.selectedCategory = this.selectedNotita.category;
+    this.selectedComment = this.selectedNotita.comment;
+  }
 
 }
